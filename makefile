@@ -1,4 +1,4 @@
-all: cpp javac 
+all: cpp javaci
 	javaci
 	cpp
 
