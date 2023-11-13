@@ -3,35 +3,61 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <sstream>
+#include <vector>
+
 
 using namespace std;
 
-void sixteendigit(char*);
+void sixteendigit(const char*);
 void fifteendigit(char*);
+vector<string> split(const string &s, char delim){
+  vector<string> result;
+  stringstream ss (s);
+  string item;
+
+  while(getline(ss,item,delim)){
+    result.push_back(item);
+  }
+  return result;
+}
+
+
 
 int main(int argc, char *argv[]){
   if(argc<2){
     cout << "Correct Usage: " << argv[0] << " <card#>" << endl;
     return 0;
   } 
-  bool b = argv[1][15] == '\0';
-  if(b){
+  string s = (string)argv[1];
+  cout << "get into cpp from luhnTest" << endl;
+  vector<string> args = split(argv[1],' ');
+  for(auto j: args)cout << j << endl;
+
+  const char* st = args.at(0).c_str();
+  /*if(b){
     fifteendigit(argv[1]);
-  }else{
-    sixteendigit(argv[1]);
-  }
+  }else{*/
+    sixteendigit(st);
+ // }
 
   return 0;
 }
 
-void sixteendigit(char* number){
+void sixteendigit(const char* number){
   cout << "gets to 16d" << endl;
   int sum = 0;
   //max index = 15, lowest index = 0
-  for(int i = 0; i< 16; i++){
+  for(int i = 15; i>-1; i--){
+    cout << (number[i]) << ";";
     if(i%2 == 0){
-      if(number[i] >4){
-        switch(number[i]){
+        switch((int)number[i]-48){
+          case 1:
+          case 2:
+          case 3:
+          case 4:
+            sum+= ((int)number[i]-48)*2;  
+            break;        
           case 5:
             sum+=1;
             break;
@@ -48,15 +74,14 @@ void sixteendigit(char* number){
             sum+=9;
             break;
         }
-
-      }else{
-        sum += number[i]*2;
-      }
     }else{
-      sum+=number[i];
+      cout << "else" << ";";
+      sum+=(int)number[i]-48;
     }
+    cout << sum << endl;
   }
-  cout << sum << endl;
+  string t = sum%10 == 0? "Valid Card" : "Invalid Card";
+  cout << t << endl;
 }
 void fifteendigit(char* number){
 

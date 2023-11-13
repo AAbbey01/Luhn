@@ -6,16 +6,15 @@ public class luhnjava{
 
 
 public static void main(String args[]){
-    System.out.println("Input your card number to be verified");
-    Scanner scan = new Scanner(System.in);
-    String s = scan.nextLine();
-    scan.close();
-    if(s.length()==15){
-        System.out.print(fift(s));
+
+    String[] result = args[0].split(" ");
+    if(result[0].length()==15){
+        System.out.print(fift(result[0]));
     }else{
-        System.out.print(sisxt(s));
+        System.out.print(sisxt(result[0]));
     }
 }
+
 private static int sisxt(String s) {
     char[] c = {s.charAt(0),s.charAt(1),s.charAt(2),s.charAt(4)};
     String provider ="";
@@ -31,7 +30,7 @@ private static int sisxt(String s) {
         float i = Float.parseFloat(s);
         for(int k = 0; k<j-1;k++){
             i/=10;
-            System.out.println(i);
+            //System.out.println(i);
         }
         
         if(j%2==0){
@@ -39,10 +38,10 @@ private static int sisxt(String s) {
             if(da>9){
                 da-=9;
             }
-            System.out.println(da);
+            //System.out.println(da);
             sum+=da;
         }else{
-            System.out.println((int)((i)%10));
+            //System.out.println((int)((i)%10));
             sum+= (int)((i)%10);
             
         }

@@ -1,6 +1,7 @@
-all: cpp javaci
-	javaci
-	cpp
+all: cpp javaci c
+
+c: 
+	gcc luhnTest.c -o  luhnTest
 
 cpp: cppmain
 	g++ -g -Wall -std=c++11 luhncpp.o -o luhncpp
@@ -12,10 +13,9 @@ javaci:
 	javac luhnjava.java
 
 clean: 
-	rm -f *.o luhncpp luhnjava.class
+	rm -f *.o luhncpp luhnjava.class luhnTest
 
 javaRun:
 	java luhnjava
 
-cppRun:
-	./luhncpp 6211478804654556
+tests:
