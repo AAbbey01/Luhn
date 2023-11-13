@@ -6,7 +6,6 @@
 
 int mygetch(void);
 
-
 int main(){
     printf("This file will go through testcards.txt through one or more of the codes provided\n");
     printf("Choose J or C at the start if you want the whole file to be ran in either Java or CPP\n");
@@ -29,7 +28,7 @@ int main(){
 
 
     while((c = mygetch()) != 'w'){
-        int pid = fork();
+        int pid;
         if((read = getline(&line,&len, myfile)) !=EOF)
             goto end;
         if(pid == 0){
@@ -42,6 +41,7 @@ int main(){
                     break;
                 break;
                 case 'j':
+                    pid = fork();
                     printf("testing %s in java\n", line);
                     execlp("java",
                         "java",
@@ -50,6 +50,7 @@ int main(){
                             NULL);
                     break;
                 case 'c':
+                    pid = fork();
                     printf("testing %s in c++\n", line);
                     execlp("./luhncpp","./luhncpp",line,NULL);
                     break;
